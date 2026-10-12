@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", Impact, sans-serif;
+  --color-ink: #07080d;
+  --color-ink-2: #10131b;
+  --color-panel: #151822;
+  --color-gold: #f0c14b;
+  --color-gold-2: #ffe7a3;
+  --color-rose: #ff4d6d;
+  --color-mint: #3ddc97;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #07080d;
+}
+
+body {
+  overflow-x: hidden;
+  color: white;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: #f0c14b;
+  color: #07080d;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07080d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #343846;
+  border-radius: 999px;
+}
+
+:focus-visible {
+  outline: 2px solid #f0c14b;
+  outline-offset: 3px;
+}
+
+@layer components {
+.btn-gold,
+.btn-ghost,
+.btn-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--color-ink);
+  padding: 0.9rem 1.45rem;
+  box-shadow: 0 8px 24px rgba(240, 193, 75, 0.18);
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-2);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(240, 193, 75, 0.32);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.9rem 1.45rem;
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.btn-line {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.7rem 1rem;
+}
+
+.btn-line:hover,
+.btn-line[data-on="true"] {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(240, 193, 75, 0.08);
+}
+
+.btn-gold:active,
+.btn-ghost:active,
+.btn-line:active {
+  transform: scale(0.98);
+}
+
+.btn-gold:disabled,
+.btn-ghost:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.field {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.85rem 1rem;
+  color: white;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.field::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.field:focus {
+  border-color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+select.field {
+  color-scheme: dark;
+}
+}
+
+.lift {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 48%,
+    transparent 64%
+  );
+  transform: translateX(-130%);
+  pointer-events: none;
+}
+
+.group:hover .shine::after {
+  animation: sweep 0.85s ease;
+}
+
+@keyframes sweep {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+.animate-ken {
+  animation: ken 12s ease-out forwards;
+}
+
+@keyframes loadbar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-load {
+  transform-origin: left center;
+  animation: loadbar 5.5s linear forwards;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pop {
+  animation: pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(105vh) rotate(280deg);
+  }
+}
+
+.confetti {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  animation: fall 2.6s ease-in forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+}
